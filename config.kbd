@@ -1,7 +1,11 @@
 (defcfg
- 
-  input  (low-level-hook)
-  output (send-event-sink))
+  ;; windows config
+  ;; input  (low-level-hook)
+  ;; output (send-event-sink))
+  ;; Linux config
+  input (device-file "/dev/input/by-id/usb-Keychron_Keychron_K15_Pro-event-kbd")
+  output (uinput-sink "My Kmonad output")
+  )
 
 (defalias
   ;; s (layer-next shifts)
@@ -20,8 +24,6 @@
   ~ #(+~ spc)
   dq #(+" spc)
   € RA-5
-  ws (sticky-key 300 M-lsft)
-  cs (sticky-key 300 C-lsft)
 )
 
 (defsrc
@@ -36,37 +38,37 @@
 
 (deflayer base
   esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f11  f11   f12    prnt       del  prnt
-  @ws   1    2    3    4    5    6    7    8    9    0    _     _      bspc       pgup nlck  kp/  kp*  kp-
-  tab   b    u    g    h    p    /    v    d    l    j    z     _      @num       pgdn kp7   kp8  kp9  kp+
+  esc   1    2    3    4    5    6    7    8    9    0    _     _      bspc       pgup nlck  kp/  kp*  kp-
+  tab   b    u    g    h    p    /    v    d    l    j    y     z      @num       pgdn kp7   kp8  kp9  kp+
   caps  a    o    i    e    ,    c    t    s    r    n    m     ret               home kp4   kp5  kp6  kp+
-  lsft  @sym y    x    f    k    .    @'   q    w    @msc @acc         up              kp1   kp2  kp3  kprt
-  lctl  lmet @sh       spc       ralt cmps rctl                 left   down rght       kp0        kp.  kprt
+  lsft  @sh @sym  x    f    k    .    @'   q    w    @msc @acc         up              kp1   kp2  kp3  kprt
+  lctl  lmet lalt      spc       ralt cmps rctl                 left   down rght       kp0        kp.  kprt
   )
 
 (deflayer shifts
   esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    prnt       del  prnt
-  @cs   _    _    _    _    _    _    _    _    _    _    _     _      bspc       pgup nlck  kp/  kp*  kp-
-  tab   B    U    G    H    P    \    V    D    L    J    Z     _      @num       pgdn kp7   kp8  kp9  kp+
+  _     _    _    _    _    _    _    _    _    _    _    _     _      bspc       pgup nlck  kp/  kp*  kp-
+  tab   B    U    G    H    P    \    V    D    L    J    Y     Z      @num       pgdn kp7   kp8  kp9  kp+
   caps  A    O    I    E    ;    C    T    S    R    N    M     ret               home kp4   kp5  kp6  kp+
-  _     _    Y    X    F    K    :    @`   Q    W    _    @sha         up              kp1   kp2  kp3  kprt
+  lsft  _    _    X    F    K    :    @`   Q    W    _    @sha         up              kp1   kp2  kp3  kprt
   lctl  lmet _         spc       ralt cmps rctl                 left   down rght       kp0        kp.  kprt
   )
 
 (deflayer accents
   esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    prnt       del  prnt
   _     _    _    î    ï    _    _    _    _    _    _    _     _      bspc       pgup nlck  kp/  kp*  kp-
-  tab   à    ù    ï    _    _    _    _    _    _    _    _     _      _          pgdn kp7   kp8  kp9  kp+
-  caps  ê    ë    é    è    _    @ç   _    _    _    _    _     ret               home kp4   kp5  kp6  kp+
-  _     â    ô    î    û    _    _    _    _    _    _    _            up              kp1   kp2  kp3  kprt
-  lctl  lmet @sha      spc       ralt cmps rctl                 left   down rght       kp0        kp.  kprt
+  tab   â    ô    î    û    _    _    _    _    _    _    _     _      _          pgdn kp7   kp8  kp9  kp+
+  caps  ë    ê    é    è    _    @ç   _    _    _    _    _     ret               home kp4   kp5  kp6  kp+
+  lsft  @sha _    à    ù    _    _    _    _    _    _    _            up              kp1   kp2  kp3  kprt
+  lctl  lmet lalt      spc       ralt cmps rctl                 left   down rght       kp0        kp.  kprt
   )
 
 (deflayer shifts-accents
   esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    prnt       del  prnt
   _     _    _    Î    Ï    _    _    _    _    _    _    _     _      bspc       pgup nlck  kp/  kp*  kp-
-  tab   À    Ù    Ï    _    _    _    _    _    _    _    _     _      _          pgdn kp7   kp8  kp9  kp+
-  caps  Ê    Ë    É    È    _    @Ç   _    _    _    _    _     ret               home kp4   kp5  kp6  kp+
-  lsft  Â    Ô    Î    Û    _    _    _    _    _    _    rsft         up              kp1   kp2  kp3  kprt
+  tab   Â    Ô    Î    Û    _    _    _    _    _    _    _     _      _          pgdn kp7   kp8  kp9  kp+
+  caps  Ë    Ê    É    È    _    @Ç   _    _    _    _    _     ret               home kp4   kp5  kp6  kp+
+  lsft  _    _    À    Ù    _    _    _    _    _    _    rsft         up              kp1   kp2  kp3  kprt
   lctl  lmet lalt      spc       ralt cmps rctl                 left   down rght       kp0        kp.  kprt
   )
 
